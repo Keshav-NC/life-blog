@@ -75,7 +75,7 @@ function Post() {
             Title: {post.title}
           </h1>
         </div>
-        <div className="browser-css text-gray-800 font-medium text-xl bg-white/20 backdrop-blur-md p-5 rounded-md shadow">
+        <div className="mx-3 browser-css text-gray-800 font-medium text-xl bg-white/20 backdrop-blur-md p-5 rounded-md shadow">
           {parse(post.content)}
         </div>
       </div>
