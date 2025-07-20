@@ -11,8 +11,6 @@ function Post() {
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
   const { slug } = useParams();
-  const userData = useSelector((state) => state.auth.userData);
-  const isAuthor = post && userData ? userData.$id === post.userId : false;
 
   useEffect(() => {
     if (slug) {
@@ -25,6 +23,9 @@ function Post() {
     }
   }, [slug, navigate]);
 
+  const userData = useSelector((state) => state.auth.userData);
+  const isAuthor = post && userData ? userData.$id === post.userId : false;
+
   const handleDeletePost = () => {
     databasesService.deletePost(post.$id).then((status) => {
       if (status) {
@@ -36,7 +37,7 @@ function Post() {
 
   return post ? (
     <Container>
-      <div className="py-4 w-full flex flex-col justify-center items-center gap-4 mt-2">
+      <div className="py-4 flex flex-col justify-center items-center gap-4 mt-2 mx-3 sm:mx-0">
         <div className="w-1/2">
           {post.featuredImage && (
             <img
@@ -75,7 +76,7 @@ function Post() {
             Title: {post.title}
           </h1>
         </div>
-        <div className="mx-3 sm:mx-0 browser-css text-gray-800 font-medium text-xl bg-white/20 backdrop-blur-md p-5 rounded-md shadow">
+        <div className="browser-css text-gray-800 font-medium text-xl bg-white/20 backdrop-blur-md p-5 rounded-md shadow w-full">
           {parse(post.content)}
         </div>
       </div>
