@@ -3,6 +3,7 @@ import { logout } from "../../features/slice/authSlice";
 import authService from "../../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Logout() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function Logout() {
     authService.logout().then(() => {
       dispatch(logout());
       navigate("/login");
+      toast.success("You've successfully logged out.");
     });
   };
 

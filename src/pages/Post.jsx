@@ -6,6 +6,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import parse from "html-react-parser";
+import { toast } from "react-toastify";
 
 function Post() {
   const [post, setPost] = useState(null);
@@ -31,6 +32,7 @@ function Post() {
       if (status) {
         storageService.deleteFile(post.featuredImage);
         navigate("/");
+        toast.success("Post deleted successfully!");
       }
     });
   };

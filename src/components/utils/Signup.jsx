@@ -6,6 +6,7 @@ import { Input, Button, Container, Logo } from "../index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { toast } from "react-toastify";
 
 function Signup() {
   const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -28,6 +29,7 @@ function Signup() {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(login(userData));
         navigate("/");
+        toast.success("Account created successfully!");
       }
     } catch (error) {
       setError(error.message);

@@ -5,6 +5,7 @@ import { RealTimeEditor as RTE, Button, Input, Select } from "../index";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
@@ -37,6 +38,7 @@ function PostForm({ post }) {
         featuredImage: file ? file.$id : undefined, // Todo --> handle undefined
       });
       if (updateDBPost) navigate(`/post/${updateDBPost.$id}`);
+      toast.success("Post updated successfully!");
     } else {
       // upload new img
       const file = data.image[0]
@@ -53,6 +55,7 @@ function PostForm({ post }) {
         });
         if (createDBPost) navigate(`/post/${createDBPost.$id}`);
       }
+      toast.success("Post created successfully!");
     }
   };
 

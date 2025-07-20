@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Button, Container, Input, Logo } from "../index";
 import { ErrorMessage } from "@hookform/error-message";
+import { toast } from "react-toastify";
 
 function Login() {
   const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,9 +28,13 @@ function Login() {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(login(userData));
         navigate("/");
+        toast.success("Logged in successfully!");
+      } else {
+        toast.error("Failed to log in. Please check your credentials.");
       }
     } catch (error) {
       setError(error);
+      toast.error("Failed to log in. Please check your credentials.");
     }
   };
   return (

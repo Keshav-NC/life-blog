@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Outlet } from "react-router-dom";
-import { Loader, Landing } from "./components";
+import { Loader } from "./components";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const authStatus = useSelector((state) => state.auth.user);
   useEffect(() => {
     authService
       .getCurrentUser()
@@ -33,8 +33,16 @@ function App() {
         <>
           <Header />
           <main>
-            {/* <Landing /> */}
             <Outlet />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick
+              pauseOnHover
+              theme="colored"
+            />
           </main>
           <Footer />
         </>
